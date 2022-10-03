@@ -1,0 +1,30 @@
+---
+title: "Assignment 2"
+author: Mackenzie Catalano
+output: html_document
+date: "2022-10-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+1. How would the customer be calssified? This customer would be classified in the 0 (no loan category).
+
+2. What is a choice of k that balances between overfitting and ignoring the predictor
+information? We choose the value of k at 3 as it provides the best result.
+
+3. Show the confusion matrix for the validation data that results from using the best k
+prediction    0    1
+         0 1801   77
+         1    7  114
+
+4. the kNN model predicted that the new customer will accept a loan offer.
+
+5. The model had better performance in the test set, this is due to the fact that it learned about 80% of the data. In the training data set, we only taught kNN about 50% of the data. With the test set we receieved better accuracy because more data was learned. 
