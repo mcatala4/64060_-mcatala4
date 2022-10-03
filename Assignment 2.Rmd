@@ -19,12 +19,89 @@ When you click the **Knit** button a document will be generated that includes bo
 
 2. What is a choice of k that balances between overfitting and ignoring the predictor
 information? We choose the value of k at 3 as it provides the best result.
+accuracy.df <- data.frame(k = seq(1, 60, 1), accuracy = rep(0, 60))
+> for(i in 1:60) {
++ prediction <- knn(train = train.norm.df[,-7], test = valid.norm.df[-7], 
++                   cl = train.norm.df[,7], k = i, prob=TRUE)
++ accuracy.df[i,2] <- mean(prediction==actual)
++ }
+> accuracy.df 
+
+    k  accuracy
+1   1 0.9569785
+2   2 0.9529765
+3   3 0.9579790
+4   4 0.9534767
+5   5 0.9504752
+6   6 0.9499750
+7   7 0.9524762
+8   8 0.9519760
+9   9 0.9504752
+10 10 0.9489745
+11 11 0.9479740
+12 12 0.9469735
+13 13 0.9469735
+14 14 0.9454727
+15 15 0.9429715
+16 16 0.9419710
+17 17 0.9414707
+18 18 0.9394697
+19 19 0.9409705
+20 20 0.9384692
+21 21 0.9389695
+22 22 0.9384692
+23 23 0.9364682
+24 24 0.9364682
+25 25 0.9359680
+26 26 0.9369685
+27 27 0.9364682
+28 28 0.9354677
+29 29 0.9349675
+30 30 0.9349675
+31 31 0.9344672
+32 32 0.9359680
+33 33 0.9354677
+34 34 0.9339670
+35 35 0.9334667
+36 36 0.9339670
+37 37 0.9344672
+38 38 0.9334667
+39 39 0.9344672
+40 40 0.9339670
+41 41 0.9339670
+42 42 0.9324662
+43 43 0.9324662
+44 44 0.9334667
+45 45 0.9334667
+46 46 0.9339670
+47 47 0.9329665
+48 48 0.9324662
+49 49 0.9309655
+50 50 0.9314657
+51 51 0.9314657
+52 52 0.9309655
+53 53 0.9309655
+54 54 0.9304652
+55 55 0.9304652
+56 56 0.9309655
+57 57 0.9304652
+58 58 0.9299650
+59 59 0.9309655
+60 60 0.9299650
 
 3. Show the confusion matrix for the validation data that results from using the best k
 prediction    0    1
          0 1801   77
          1    7  114
+> set.seed(2019)
+> prediction <- knn(train = train.norm.df[,-7], test = valid.norm.df[,-7], 
++                   cl = train.norm.df[,7], k = 3, prob=TRUE)
+> actual= valid.norm.df$Personal.Loan
+> prediction_prob = attr(prediction,"prob")
+> table(prediction,actual)
 
 4. the kNN model predicted that the new customer will accept a loan offer.
+> prediction_test <- knn(train = maindata.norm.df[,-7], test = Test_Data, 
++                        cl = maindata.norm.df[,7], k = 1, prob=TRUE)
 
 5. The model had better performance in the test set, this is due to the fact that it learned about 80% of the data. In the training data set, we only taught kNN about 50% of the data. With the test set we receieved better accuracy because more data was learned. 
